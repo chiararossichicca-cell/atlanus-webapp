@@ -216,11 +216,12 @@
     tg.expand();
 
     function selezionaRisorsa(chiave) {
-      if (tg.initData) {
+      try {
+        // Invia i dati direttamente al bot
         tg.sendData(JSON.stringify({ risorsa: chiave }));
         tg.close();
-      } else {
-        alert("Attenzione: apri questa schermata dal pulsante all'interno del Bot Telegram!");
+      } catch (e) {
+        console.error("Errore invio:", e);
       }
     }
   </script>
