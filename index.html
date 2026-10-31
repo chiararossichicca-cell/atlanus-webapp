@@ -15,7 +15,6 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      /* SFONDO DINAMICO CON IMMAGINE E SFUMATURA NEON */
       background: linear-gradient(180deg, rgba(10, 14, 26, 0.75) 0%, rgba(5, 7, 15, 0.95) 100%),
                   url('sfondo.jpg') center/cover no-repeat fixed #0a0e1a;
       color: var(--text-main);
@@ -28,7 +27,6 @@
       align-items: center;
     }
 
-    /* BANNER IN ALTO GRANDE ED ELEGANTE */
     .banner-container {
       width: 100%;
       max-width: 420px;
@@ -63,7 +61,6 @@
       margin: 0;
     }
 
-    /* CONTENITORE SCHEDE */
     .card-container {
       display: flex;
       flex-direction: column;
@@ -83,7 +80,6 @@
       text-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
     }
 
-    /* SCHEDE GLASSMORPHISM */
     .app-card {
       background: var(--card-bg);
       backdrop-filter: blur(16px);
@@ -148,7 +144,6 @@
       margin-top: 3px;
     }
 
-    /* PULSANTI CON EFFETTO NEON */
     .btn-select {
       background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
       color: #ffffff;
@@ -169,7 +164,6 @@
 </head>
 <body>
 
-  <!-- BANNER COPERTINA IN ALTO -->
   <div class="banner-container">
     <img src="banner.jpg" alt="Atlanus Banner" class="banner-img" onerror="this.style.display='none'">
     <h1 class="header-title">Atlanus VIP Panel</h1>
@@ -178,7 +172,6 @@
 
   <div class="card-container">
     
-    <!-- SEZIONE 1 -->
     <div class="section-label">Risorse Generali</div>
     <div class="app-card" onclick="selezionaRisorsa('sezione_1')">
       <div class="app-info">
@@ -191,10 +184,8 @@
       <button class="btn-select btn-sez1">Riscatta</button>
     </div>
 
-    <!-- SEZIONE 2 -->
     <div class="section-label">Credenziali App Atlanus</div>
     
-    <!-- SKY LIGHT -->
     <div class="app-card" onclick="selezionaRisorsa('atlanus_skylight')">
       <div class="app-info">
         <img src="skylight.jpg" alt="Sky Light" class="app-icon">
@@ -206,7 +197,6 @@
       <button class="btn-select">Riscatta</button>
     </div>
 
-    <!-- OFFICIAL GROUP -->
     <div class="app-card" onclick="selezionaRisorsa('atlanus_officialgroup')">
       <div class="app-info">
         <img src="officialgroup.jpg" alt="Official Group" class="app-icon">
@@ -222,10 +212,16 @@
 
   <script>
     const tg = window.Telegram.WebApp;
+    tg.ready();
     tg.expand();
 
     function selezionaRisorsa(chiave) {
-      tg.sendData(JSON.stringify({ risorsa: chiave }));
+      if (tg.initData) {
+        tg.sendData(JSON.stringify({ risorsa: chiave }));
+        tg.close();
+      } else {
+        alert("Attenzione: apri questa schermata dal pulsante all'interno del Bot Telegram!");
+      }
     }
   </script>
 </body>
