@@ -3,112 +3,228 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atlanus App Selection</title>
+  <title>Atlanus Premium Dashboard</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
+    :root {
+      --bg-color: #0d1117;
+      --card-bg: rgba(22, 27, 34, 0.75);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --accent-blue: #2f81f7;
+      --accent-purple: #8957e5;
+      --accent-gold: #f1e05a;
+      --text-main: #f0f6fc;
+      --text-sub: #8b949e;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--tg-theme-bg-color, #18222d);
-      color: var(--tg-theme-text-color, #ffffff);
+      background: radial-gradient(circle at top, #161b22 0%, #0d1117 100%);
+      color: var(--text-main);
       margin: 0;
-      padding: 20px;
+      padding: 20px 15px;
+      min-height: 100vh;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    h2 {
-      margin-bottom: 20px;
+    /* BANNER / LOGO INIZIALE */
+    .header-container {
       text-align: center;
+      margin-bottom: 25px;
+      width: 100%;
+      max-width: 420px;
     }
 
+    .header-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(47, 129, 247, 0.3);
+      margin-bottom: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .header-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0;
+      background: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .header-subtitle {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-top: 5px;
+    }
+
+    /* CONTENITORE SCHEDE */
     .card-container {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 16px;
       width: 100%;
-      max-width: 400px;
+      max-width: 420px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-sub);
+      letter-spacing: 1.2px;
+      margin-top: 5px;
+      margin-bottom: -5px;
     }
 
     .app-card {
-      background-color: var(--tg-theme-secondary-bg-color, #212d3b);
-      border-radius: 12px;
-      padding: 12px;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      cursor: pointer;
-      transition: transform 0.2s, background-color 0.2s;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .app-card:active {
-      transform: scale(0.98);
-      background-color: var(--tg-theme-button-color, #2f6ea5);
+      transform: scale(0.97);
+      border-color: rgba(47, 129, 247, 0.5);
     }
 
     .app-info {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .app-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 10px;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
       object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .icon-placeholder {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #238636 0%, #2ea043 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .app-details {
+      display: flex;
+      flex-direction: column;
     }
 
     .app-title {
-      font-weight: bold;
+      font-weight: 700;
       font-size: 16px;
+      color: var(--text-main);
     }
 
+    .app-desc {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+
+    /* PULSANTI */
     .btn-select {
-      background-color: var(--tg-theme-button-color, #2481cc);
-      color: var(--tg-theme-button-text-color, #ffffff);
+      background: linear-gradient(135deg, #1f6beb 0%, #238636 100%);
+      color: #ffffff;
       border: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-weight: bold;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13px;
       cursor: pointer;
+      box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
+    }
+
+    .btn-sez1 {
+      background: linear-gradient(135deg, #238636 0%, #2ea043 100%);
+      box-shadow: 0 4px 12px rgba(46, 160, 67, 0.3);
     }
   </style>
 </head>
 <body>
 
-  <h2>Seleziona l'App Atlanus</h2>
+  <!-- HEADER CON LOGO PRINCIPALE -->
+  <div class="header-container">
+    <!-- Se hai un logo generale puoi inserirlo qui come logo.jpg, altrimenti mostra una fantastica icona -->
+    <img src="skylight.jpg" alt="Logo" class="header-logo" onerror="this.style.display='none'">
+    <h1 class="header-title">Atlanus VIP Panel</h1>
+    <p class="header-subtitle">Seleziona la risorsa che desideri riscattare</p>
+  </div>
 
   <div class="card-container">
-    <!-- OPZIONE 1: SKY LIGHT -->
-    <div class="app-card" onclick="selezionaApp('skylight')">
+    
+    <!-- SEZIONE 1: LISTE / LINK -->
+    <div class="section-label">Risorse Generali</div>
+    <div class="app-card" onclick="selezionaRisorsa('sezione_1')">
       <div class="app-info">
-        <!-- Inserisci qui l'URL o il percorso dell'immagine di Sky Light -->
+        <div class="icon-placeholder">🔗</div>
+        <div class="app-details">
+          <div class="app-title">Sezione 1</div>
+          <div class="app-desc">Liste e Link aggiornati</div>
+        </div>
+      </div>
+      <button class="btn-select btn-sez1">Riscatta</button>
+    </div>
+
+    <!-- SEZIONE 2: APPLICAZIONI ATLANUS -->
+    <div class="section-label">Credenziali App Atlanus</div>
+    
+    <!-- SKY LIGHT -->
+    <div class="app-card" onclick="selezionaRisorsa('atlanus_skylight')">
+      <div class="app-info">
         <img src="skylight.jpg" alt="Sky Light" class="app-icon">
-        <div class="app-title">Sky Light</div>
+        <div class="app-details">
+          <div class="app-title">Sky Light</div>
+          <div class="app-desc">Account & Pass Atlanus</div>
+        </div>
       </div>
       <button class="btn-select">Riscatta</button>
     </div>
 
-    <!-- OPZIONE 2: OFFICIAL GROUP -->
-    <div class="app-card" onclick="selezionaApp('officialgroup')">
+    <!-- OFFICIAL GROUP -->
+    <div class="app-card" onclick="selezionaRisorsa('atlanus_officialgroup')">
       <div class="app-info">
-        <!-- Inserisci qui l'URL o il percorso dell'immagine di Official Group -->
         <img src="officialgroup.jpg" alt="Official Group" class="app-icon">
-        <div class="app-title">Official Group</div>
+        <div class="app-details">
+          <div class="app-title">Official Group</div>
+          <div class="app-desc">Account & Pass Official</div>
+        </div>
       </div>
       <button class="btn-select">Riscatta</button>
     </div>
+
   </div>
 
   <script>
     const tg = window.Telegram.WebApp;
     tg.expand();
 
-    function selezionaApp(scelta) {
-      // Invia la scelta al bot Python sotto forma di stringa JSON
-      tg.sendData(JSON.stringify({ azione: "riscatta_atlanus", tipo: scelta }));
+    function selezionaRisorsa(chiave) {
+      // Invia la chiave selezionata direttamente al Bot Python
+      tg.sendData(JSON.stringify({ risorsa: chiave }));
     }
   </script>
 </body>
